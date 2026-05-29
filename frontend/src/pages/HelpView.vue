@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 const sections = [
   { id: 'what', label: 'Harness とは' },
-  { id: 'profile', label: '設定セットを作る' },
+  { id: 'profile', label: 'パッケージを作る' },
   { id: 'permissions', label: 'Permissions' },
   { id: 'hooks', label: 'Hooks' },
   { id: 'env', label: 'Env Vars' },
@@ -47,8 +47,8 @@ function scrollTo(id: string) {
         </h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
           Claude Code の <code class="font-mono text-xs bg-muted px-1 py-0.5 rounded">.claude/settings.json</code> に書く
-          「AIが何のツールを使えるか」「フック」「環境変数」をまとめた設定セットです。
-          Harness Manager では複数の設定を <strong>設定セット</strong> として保存・管理し、
+          「AIが何のツールを使えるか」「フック」「環境変数」をまとめたパッケージです。
+          Harness Manager では複数の設定を <strong>パッケージ</strong> として保存・管理し、
           任意のプロジェクトにワンクリックでエクスポートできます。
         </p>
         <div class="bg-muted/50 rounded-lg p-4 text-xs font-mono text-foreground leading-relaxed">
@@ -65,7 +65,7 @@ function scrollTo(id: string) {
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
           </svg>
-          設定セットを作る
+          パッケージを作る
         </h2>
         <ol class="text-sm text-muted-foreground space-y-2 list-none">
           <li class="flex gap-3">
@@ -183,7 +183,7 @@ function scrollTo(id: string) {
           Export
         </h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          設定セット編集画面の <strong class="text-foreground">Export</strong> ボタンを押すとフォルダ選択ダイアログが開き、
+          パッケージ編集画面の <strong class="text-foreground">Export</strong> ボタンを押すとフォルダ選択ダイアログが開き、
           選んだフォルダに <code class="font-mono text-xs bg-muted px-1 py-0.5 rounded">settings.json</code> を書き出します。
         </p>
         <div class="text-xs space-y-1 text-muted-foreground">
@@ -204,9 +204,9 @@ function scrollTo(id: string) {
           Import
         </h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          設定セット一覧の <strong class="text-foreground">Import settings.json</strong> ボタンからファイルを選ぶと、
-          既存の settings.json を新しい設定セットとして取り込めます。
-          設定セット名はファイルが入っているフォルダ名が使われます。
+          パッケージ一覧の <strong class="text-foreground">Import settings.json</strong> ボタンからファイルを選ぶと、
+          既存の settings.json を新しいパッケージとして取り込めます。
+          パッケージ名はファイルが入っているフォルダ名が使われます。
         </p>
       </section>
 
@@ -219,7 +219,7 @@ function scrollTo(id: string) {
           プリセット
         </h2>
         <p class="text-sm text-muted-foreground leading-relaxed">
-          よく使う設定パターンをプリセットとして用意しています。サイドバーの Presets から <strong class="text-foreground">Use</strong> をクリックすると設定セットとして追加されます。
+          よく使う設定パターンをプリセットとして用意しています。サイドバーの Presets から <strong class="text-foreground">Use</strong> をクリックするとパッケージとして追加されます。
         </p>
         <div class="space-y-2 text-xs">
           <div class="p-3 rounded-lg border border-border flex gap-3">
