@@ -9,6 +9,7 @@ import ProfileListView from './pages/ProfileListView.vue'
 import ProfileEditView from './pages/ProfileEditView.vue'
 import PresetsView from './pages/PresetsView.vue'
 import SettingsView from './pages/SettingsView.vue'
+import HelpView from './pages/HelpView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -19,6 +20,7 @@ const router = createRouter({
     { path: '/profiles/:id/edit', component: ProfileEditView },
     { path: '/presets', component: PresetsView },
     { path: '/settings', component: SettingsView },
+    { path: '/help', component: HelpView },
   ],
 })
 
