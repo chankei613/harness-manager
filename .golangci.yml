@@ -11,9 +11,3 @@ linters:
     - errcheck
     - ineffassign
     - unused
-
-issues:
-  exclude-dirs:
-    - frontend
-    - node_modules
-  exclude-dirs-use-default: true

@@ -137,8 +137,12 @@ func TestImportFromSettings_Basic(t *testing.T) {
 
 func TestImportFromSettings_InvalidJSON(t *testing.T) {
 	tmp := filepath.Join(t.TempDir(), "proj", "settings.json")
-	os.MkdirAll(filepath.Dir(tmp), 0755)
-	os.WriteFile(tmp, []byte("not json"), 0644)
+	if err := os.MkdirAll(filepath.Dir(tmp), 0755); err != nil {
+		t.Fatalf("mkdir: %v", err)
+	}
+	if err := os.WriteFile(tmp, []byte("not json"), 0644); err != nil {
+		t.Fatalf("write: %v", err)
+	}
 
 	m := NewManager()
 	_, err := m.ImportFromSettings(tmp)
