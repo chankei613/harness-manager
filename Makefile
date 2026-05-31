@@ -17,7 +17,7 @@ lint:
 	cd frontend && npm run lint
 
 test:
-	go test . ./internal/...
+	go test ./internal/...
 	cd frontend && npm run test:unit
 
 tidy:
