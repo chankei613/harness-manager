@@ -149,10 +149,12 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
       <!-- Header -->
       <div class="flex items-center justify-between px-6 py-4 border-b border-border bg-background shrink-0">
         <div class="flex items-center gap-3">
-          <button @click="router.push('/profiles')"
-            class="text-muted-foreground hover:text-foreground transition-colors">
+          <button
+            class="text-muted-foreground hover:text-foreground transition-colors"
+            @click="router.push('/profiles')"
+          >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
+              <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </button>
           <h2 class="text-base font-semibold text-foreground">
@@ -162,18 +164,18 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
         <div class="flex items-center gap-2">
           <button
             v-if="profileId"
-            @click="handleExport"
             class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground transition-colors"
+            @click="handleExport"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
             </svg>
             Export
           </button>
           <button
-            @click="save"
             :disabled="!name.trim() || saving"
             class="px-4 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            @click="save"
           >
             {{ saving ? 'Saving...' : 'Save' }}
           </button>
@@ -227,11 +229,11 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             <button
               v-for="tab in ['permissions', 'hooks', 'env'] as const"
               :key="tab"
-              @click="activeTab = tab"
               class="px-3 py-2 text-sm capitalize transition-colors border-b-2 -mb-px"
               :class="activeTab === tab
                 ? 'border-foreground text-foreground font-medium'
                 : 'border-transparent text-muted-foreground hover:text-foreground'"
+              @click="activeTab = tab"
             >
               {{ tab }}
               <span v-if="tab === 'permissions' && permissions.length > 0" class="ml-1 text-xs opacity-60">({{ permissions.length }})</span>
@@ -243,19 +245,23 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
           <!-- Permissions tab -->
           <div v-if="activeTab === 'permissions'" class="space-y-3">
             <div class="flex gap-2">
-              <select v-model="newPermType"
-                class="px-2 py-1.5 text-xs border border-border rounded-md bg-background focus:outline-none">
+              <select
+                v-model="newPermType"
+                class="px-2 py-1.5 text-xs border border-border rounded-md bg-background focus:outline-none"
+              >
                 <option value="allow">allow</option>
                 <option value="deny">deny</option>
               </select>
               <input
                 v-model="newPermTool"
-                @keydown.enter="addPermission"
-                placeholder='Bash(*), Read, mcp__supabase__*'
+                placeholder="Bash(*), Read, mcp__supabase__*"
                 class="flex-1 px-3 py-1.5 text-sm border border-border rounded-md bg-background focus:outline-none focus:ring-1 focus:ring-foreground/20"
+                @keydown.enter="addPermission"
               />
-              <button @click="addPermission"
-                class="px-3 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors">
+              <button
+                class="px-3 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
+                @click="addPermission"
+              >
                 Add
               </button>
             </div>
@@ -265,15 +271,19 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                 :key="i"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border border-border group"
               >
-                <span class="text-xs px-1.5 py-0.5 rounded font-mono"
-                  :class="perm.type === 'allow' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'">
+                <span
+                  class="text-xs px-1.5 py-0.5 rounded font-mono"
+                  :class="perm.type === 'allow' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'"
+                >
                   {{ perm.type }}
                 </span>
                 <span class="flex-1 text-sm font-mono text-foreground">{{ perm.tool }}</span>
-                <button @click="removePermission(i)"
-                  class="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-red-500 transition-all">
+                <button
+                  class="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-red-500 transition-all"
+                  @click="removePermission(i)"
+                >
                   <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               </div>
@@ -283,37 +293,49 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
 
           <!-- Hooks tab -->
           <div v-if="activeTab === 'hooks'" class="space-y-3">
-            <button @click="addHook"
-              class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground transition-colors">
+            <button
+              class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground transition-colors"
+              @click="addHook"
+            >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
               </svg>
               Add Hook
             </button>
             <div class="space-y-3">
-              <div v-for="(hook, i) in hooks" :key="i"
-                class="p-3 rounded-md border border-border space-y-2">
+              <div
+                v-for="(hook, i) in hooks" :key="i"
+                class="p-3 rounded-md border border-border space-y-2"
+              >
                 <div class="flex items-center gap-2">
-                  <select v-model="hook.event"
-                    class="px-2 py-1 text-xs border border-border rounded bg-background focus:outline-none">
+                  <select
+                    v-model="hook.event"
+                    class="px-2 py-1 text-xs border border-border rounded bg-background focus:outline-none"
+                  >
                     <option v-for="ev in hookEvents" :key="ev" :value="ev">{{ ev }}</option>
                   </select>
                   <span class="text-xs text-muted-foreground">matcher:</span>
-                  <input v-model="hook.matcher" placeholder="Bash / * / Write"
-                    class="px-2 py-1 text-xs border border-border rounded bg-background focus:outline-none w-28 font-mono" />
+                  <input
+                    v-model="hook.matcher" placeholder="Bash / * / Write"
+                    class="px-2 py-1 text-xs border border-border rounded bg-background focus:outline-none w-28 font-mono"
+                  />
                   <label class="flex items-center gap-1 text-xs text-muted-foreground ml-auto">
-                    <input type="checkbox" v-model="hook.blocking" class="rounded" />
+                    <input v-model="hook.blocking" type="checkbox" class="rounded" />
                     blocking
                   </label>
-                  <button @click="removeHook(i)"
-                    class="text-muted-foreground hover:text-red-500 transition-colors">
+                  <button
+                    class="text-muted-foreground hover:text-red-500 transition-colors"
+                    @click="removeHook(i)"
+                  >
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
                   </button>
                 </div>
-                <input v-model="hook.command" placeholder="Shell command to run"
-                  class="w-full px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none focus:ring-1 focus:ring-foreground/20" />
+                <input
+                  v-model="hook.command" placeholder="Shell command to run"
+                  class="w-full px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none focus:ring-1 focus:ring-foreground/20"
+                />
               </div>
               <p v-if="hooks.length === 0" class="text-xs text-muted-foreground py-2">No hooks defined.</p>
             </div>
@@ -321,24 +343,32 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
 
           <!-- Env tab -->
           <div v-if="activeTab === 'env'" class="space-y-3">
-            <button @click="addEnvVar"
-              class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground transition-colors">
+            <button
+              class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground transition-colors"
+              @click="addEnvVar"
+            >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
               </svg>
               Add Variable
             </button>
             <div class="space-y-2">
               <div v-for="(env, i) in envVars" :key="i" class="flex items-center gap-2">
-                <input v-model="env.key" placeholder="KEY"
-                  class="w-40 px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none uppercase" />
+                <input
+                  v-model="env.key" placeholder="KEY"
+                  class="w-40 px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none uppercase"
+                />
                 <span class="text-muted-foreground text-xs">=</span>
-                <input v-model="env.value" placeholder="value"
-                  class="flex-1 px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none" />
-                <button @click="removeEnvVar(i)"
-                  class="text-muted-foreground hover:text-red-500 transition-colors">
+                <input
+                  v-model="env.value" placeholder="value"
+                  class="flex-1 px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none"
+                />
+                <button
+                  class="text-muted-foreground hover:text-red-500 transition-colors"
+                  @click="removeEnvVar(i)"
+                >
                   <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               </div>
@@ -359,9 +389,11 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
     </div>
 
     <!-- Toast -->
-    <div v-if="toast"
+    <div
+      v-if="toast"
       class="fixed bottom-4 right-4 px-4 py-2.5 rounded-lg text-sm text-white shadow-lg"
-      :class="toast.type === 'error' ? 'bg-red-500' : 'bg-gray-900'">
+      :class="toast.type === 'error' ? 'bg-red-500' : 'bg-gray-900'"
+    >
       {{ toast.msg }}
     </div>
   </div>

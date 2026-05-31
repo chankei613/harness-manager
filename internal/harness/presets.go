@@ -8,10 +8,10 @@ import (
 
 // Preset はUIに表示するプリセット定義。
 type Preset struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Icon        string `json:"icon"`
+	ID          string               `json:"id"`
+	Name        string               `json:"name"`
+	Description string               `json:"description"`
+	Icon        string               `json:"icon"`
 	Permissions []db.PermissionInput `json:"permissions"`
 	Hooks       []db.HookInput       `json:"hooks"`
 	EnvVars     []db.EnvVarInput     `json:"envVars"`

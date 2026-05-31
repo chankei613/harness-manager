@@ -12,9 +12,9 @@ const (
 	PermissionAllow PermissionType = "allow"
 	PermissionDeny  PermissionType = "deny"
 
-	HookPreToolUse  HookEvent = "PreToolUse"
-	HookPostToolUse HookEvent = "PostToolUse"
-	HookStop        HookEvent = "Stop"
+	HookPreToolUse   HookEvent = "PreToolUse"
+	HookPostToolUse  HookEvent = "PostToolUse"
+	HookStop         HookEvent = "Stop"
 	HookNotification HookEvent = "Notification"
 
 	ScopeAgent   ProfileScope = "agent"
@@ -86,20 +86,20 @@ type EnvVarInput struct {
 }
 
 type CreateProfileRequest struct {
-	Name          string           `json:"name"`
-	Description   string           `json:"description"`
-	Scope         ProfileScope     `json:"scope"`
-	ModelOverride string           `json:"modelOverride"`
+	Name          string            `json:"name"`
+	Description   string            `json:"description"`
+	Scope         ProfileScope      `json:"scope"`
+	ModelOverride string            `json:"modelOverride"`
 	Permissions   []PermissionInput `json:"permissions"`
 	Hooks         []HookInput       `json:"hooks"`
 	EnvVars       []EnvVarInput     `json:"envVars"`
 }
 
 type UpdateProfileRequest struct {
-	Name          string           `json:"name"`
-	Description   string           `json:"description"`
-	Scope         ProfileScope     `json:"scope"`
-	ModelOverride string           `json:"modelOverride"`
+	Name          string            `json:"name"`
+	Description   string            `json:"description"`
+	Scope         ProfileScope      `json:"scope"`
+	ModelOverride string            `json:"modelOverride"`
 	Permissions   []PermissionInput `json:"permissions"`
 	Hooks         []HookInput       `json:"hooks"`
 	EnvVars       []EnvVarInput     `json:"envVars"`

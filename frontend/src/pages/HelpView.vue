@@ -28,20 +28,21 @@ function scrollTo(id: string) {
       <button
         v-for="s in sections"
         :key="s.id"
-        @click="scrollTo(s.id)"
         class="w-full text-left px-2 py-1.5 rounded text-xs transition-colors"
         :class="active === s.id ? 'bg-gray-900 text-white' : 'text-muted-foreground hover:text-foreground hover:bg-muted'"
-      >{{ s.label }}</button>
+        @click="scrollTo(s.id)"
+      >
+        {{ s.label }}
+      </button>
     </aside>
 
     <!-- Content -->
-    <div class="flex-1 overflow-y-auto px-10 py-8 space-y-12 max-w-2xl" @scroll.passive>
-
+    <div class="flex-1 overflow-y-auto px-10 py-8 space-y-12 max-w-2xl">
       <!-- What is Harness -->
       <section id="what" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           Harness とは
         </h2>
@@ -52,9 +53,9 @@ function scrollTo(id: string) {
           任意のプロジェクトにワンクリックでエクスポートできます。
         </p>
         <div class="bg-muted/50 rounded-lg p-4 text-xs font-mono text-foreground leading-relaxed">
-          ~/.claude/settings.json<br/>
-          &nbsp;&nbsp;└── permissions (allow / deny)<br/>
-          &nbsp;&nbsp;└── hooks (PreToolUse / PostToolUse / ...)<br/>
+          ~/.claude/settings.json<br />
+          &nbsp;&nbsp;└── permissions (allow / deny)<br />
+          &nbsp;&nbsp;└── hooks (PreToolUse / PostToolUse / ...)<br />
           &nbsp;&nbsp;└── env vars
         </div>
       </section>
@@ -63,7 +64,7 @@ function scrollTo(id: string) {
       <section id="profile" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
+            <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6M9 12h6M9 15h4" />
           </svg>
           パッケージを作る
         </h2>
@@ -91,7 +92,7 @@ function scrollTo(id: string) {
       <section id="permissions" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
           Permissions
         </h2>
@@ -128,7 +129,7 @@ function scrollTo(id: string) {
       <section id="hooks" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+            <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
           </svg>
           Hooks
         </h2>
@@ -164,7 +165,7 @@ function scrollTo(id: string) {
       <section id="env" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 7h16M4 12h16M4 17h7"/>
+            <path d="M4 7h16M4 12h16M4 17h7" />
           </svg>
           Env Vars
         </h2>
@@ -178,7 +179,7 @@ function scrollTo(id: string) {
       <section id="export" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
           </svg>
           Export
         </h2>
@@ -199,7 +200,7 @@ function scrollTo(id: string) {
       <section id="import" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
           </svg>
           Import
         </h2>
@@ -214,7 +215,7 @@ function scrollTo(id: string) {
       <section id="presets" class="space-y-3">
         <h2 class="text-base font-semibold text-foreground flex items-center gap-2">
           <svg class="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
           プリセット
         </h2>
@@ -225,7 +226,7 @@ function scrollTo(id: string) {
           <div class="p-3 rounded-lg border border-border flex gap-3">
             <div class="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
               </svg>
             </div>
             <div>
@@ -236,7 +237,7 @@ function scrollTo(id: string) {
           <div class="p-3 rounded-lg border border-border flex gap-3">
             <div class="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+                <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
               </svg>
             </div>
             <div>
@@ -247,7 +248,7 @@ function scrollTo(id: string) {
           <div class="p-3 rounded-lg border border-border flex gap-3">
             <div class="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
             <div>
@@ -258,7 +259,7 @@ function scrollTo(id: string) {
           <div class="p-3 rounded-lg border border-border flex gap-3">
             <div class="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>
             </div>
             <div>
@@ -268,7 +269,6 @@ function scrollTo(id: string) {
           </div>
         </div>
       </section>
-
     </div>
   </div>
 </template>

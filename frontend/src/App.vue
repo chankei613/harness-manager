@@ -48,17 +48,19 @@ const navItems = [
         <div class="flex items-start justify-between">
           <div class="flex items-center gap-2">
             <svg class="w-5 h-5 text-gray-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <div>
               <h1 class="text-sm font-semibold tracking-tight text-foreground">Harness Manager</h1>
             </div>
           </div>
           <button
-            @click="toggleLocale"
             style="-webkit-app-region: no-drag"
             class="text-xs text-gray-400 hover:text-gray-700 px-1.5 py-0.5 rounded border border-gray-200 hover:border-gray-400 transition-colors shrink-0 mt-0.5"
-          >{{ t('lang.toggle') }}</button>
+            @click="toggleLocale"
+          >
+            {{ t('lang.toggle') }}
+          </button>
         </div>
       </div>
 
@@ -75,8 +77,10 @@ const navItems = [
           <!-- eslint-disable-next-line vue/no-v-html -->
           <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" v-html="item.icon" />
           <span>{{ t(item.key) }}</span>
-          <span v-if="item.to === '/profiles' && profilesStore.profiles.length > 0"
-            class="ml-auto text-xs opacity-60">{{ profilesStore.profiles.length }}</span>
+          <span
+            v-if="item.to === '/profiles' && profilesStore.profiles.length > 0"
+            class="ml-auto text-xs opacity-60"
+          >{{ profilesStore.profiles.length }}</span>
         </RouterLink>
       </nav>
 
@@ -86,7 +90,7 @@ const navItems = [
           class="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-md text-sm bg-gray-900 text-white hover:brightness-110 transition-colors"
         >
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           {{ t('nav.newProfile') }}
         </RouterLink>

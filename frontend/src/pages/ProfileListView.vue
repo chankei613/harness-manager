@@ -61,20 +61,20 @@ const scopeLabel: Record<string, string> = {
       </div>
       <div class="flex items-center gap-2">
         <button
-          @click="handleImport"
           class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+          @click="handleImport"
         >
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
           </svg>
           Import settings.json
         </button>
         <button
-          @click="router.push('/profiles/new')"
           class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
+          @click="router.push('/profiles/new')"
         >
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           New Profile
         </button>
@@ -89,19 +89,25 @@ const scopeLabel: Record<string, string> = {
       </div>
 
       <!-- Empty -->
-      <div v-else-if="store.profiles.length === 0"
-        class="flex flex-col items-center justify-center h-64 gap-3 text-center">
+      <div
+        v-else-if="store.profiles.length === 0"
+        class="flex flex-col items-center justify-center h-64 gap-3 text-center"
+      >
         <svg class="w-12 h-12 text-muted-foreground/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
         <p class="text-sm text-muted-foreground max-w-xs">{{ t('profile.list.empty') }}</p>
         <div class="flex gap-2 mt-1">
-          <button @click="router.push('/profiles/new')"
-            class="px-4 py-2 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors">
+          <button
+            class="px-4 py-2 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
+            @click="router.push('/profiles/new')"
+          >
             Create Profile
           </button>
-          <button @click="router.push('/presets')"
-            class="px-4 py-2 text-sm rounded-md border border-border text-foreground hover:bg-muted transition-colors">
+          <button
+            class="px-4 py-2 text-sm rounded-md border border-border text-foreground hover:bg-muted transition-colors"
+            @click="router.push('/presets')"
+          >
             Browse Presets
           </button>
         </div>
@@ -116,7 +122,7 @@ const scopeLabel: Record<string, string> = {
         >
           <div class="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
 
@@ -130,41 +136,41 @@ const scopeLabel: Record<string, string> = {
 
           <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
             <button
-              @click="router.push(`/profiles/${profile.id}/edit`)"
               class="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               title="Edit"
+              @click="router.push(`/profiles/${profile.id}/edit`)"
             >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
               </svg>
             </button>
             <button
-              @click="handleExport(profile.id)"
               class="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               title="Export to settings.json"
+              @click="handleExport(profile.id)"
             >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
               </svg>
             </button>
             <button
-              @click="handleDuplicate(profile.id, profile.name)"
               class="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               title="Duplicate"
+              @click="handleDuplicate(profile.id, profile.name)"
             >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                <rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
               </svg>
             </button>
             <button
-              @click="handleDelete(profile.id, profile.name)"
               class="p-1.5 rounded text-muted-foreground hover:text-red-500 hover:bg-red-50 transition-colors"
               title="Delete"
+              @click="handleDelete(profile.id, profile.name)"
             >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                <path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                <path d="M10 11v6M14 11v6" /><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
               </svg>
             </button>
           </div>
@@ -173,9 +179,11 @@ const scopeLabel: Record<string, string> = {
     </div>
 
     <!-- Toast -->
-    <div v-if="toast"
+    <div
+      v-if="toast"
       class="fixed bottom-4 right-4 px-4 py-2.5 rounded-lg text-sm shadow-lg transition-all"
-      :class="toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-gray-900 text-white'">
+      :class="toast.type === 'error' ? 'bg-red-500 text-white' : 'bg-gray-900 text-white'"
+    >
       {{ toast.msg }}
     </div>
   </div>

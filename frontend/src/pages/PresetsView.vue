@@ -60,17 +60,19 @@ async function importPreset(preset: Preset) {
                 class="text-xs px-1.5 py-0.5 rounded font-mono"
                 :class="perm.type === 'allow' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'"
               >{{ perm.tool }}</span>
-              <span v-if="preset.permissions.length > 4"
-                class="text-xs text-muted-foreground px-1.5 py-0.5">+{{ preset.permissions.length - 4 }} more</span>
+              <span
+                v-if="preset.permissions.length > 4"
+                class="text-xs text-muted-foreground px-1.5 py-0.5"
+              >+{{ preset.permissions.length - 4 }} more</span>
             </div>
           </div>
 
           <button
-            @click="importPreset(preset)"
             class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+            @click="importPreset(preset)"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
             </svg>
             Use
           </button>
@@ -78,9 +80,11 @@ async function importPreset(preset: Preset) {
       </div>
     </div>
 
-    <div v-if="toast"
+    <div
+      v-if="toast"
       class="fixed bottom-4 right-4 px-4 py-2.5 rounded-lg text-sm text-white shadow-lg"
-      :class="toast.type === 'error' ? 'bg-red-500' : 'bg-gray-900'">
+      :class="toast.type === 'error' ? 'bg-red-500' : 'bg-gray-900'"
+    >
       {{ toast.msg }}
     </div>
   </div>

@@ -20,9 +20,9 @@ func NewManager() *Manager {
 // ─── Claude Code settings.json フォーマット ──────────────────────
 
 type ClaudeSettings struct {
-	Permissions *ClaudePermissions        `json:"permissions,omitempty"`
+	Permissions *ClaudePermissions           `json:"permissions,omitempty"`
 	Hooks       map[string][]ClaudeHookEntry `json:"hooks,omitempty"`
-	Env         map[string]string         `json:"env,omitempty"`
+	Env         map[string]string            `json:"env,omitempty"`
 }
 
 type ClaudePermissions struct {
@@ -31,8 +31,8 @@ type ClaudePermissions struct {
 }
 
 type ClaudeHookEntry struct {
-	Matcher string        `json:"matcher"`
-	Hooks   []ClaudeHook  `json:"hooks"`
+	Matcher string       `json:"matcher"`
+	Hooks   []ClaudeHook `json:"hooks"`
 }
 
 type ClaudeHook struct {

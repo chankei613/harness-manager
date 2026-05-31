@@ -21,6 +21,7 @@ jobs:
         uses: golangci/golangci-lint-action@v6
         with:
           version: latest
+          args: . ./internal/...
 
   eslint:
     runs-on: ubuntu-latest

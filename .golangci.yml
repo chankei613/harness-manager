@@ -1,8 +1,19 @@
-linters:
+version: "2"
+
+formatters:
   enable:
     - gofmt
+
+linters:
+  enable:
     - govet
     - staticcheck
     - errcheck
     - ineffassign
     - unused
+
+issues:
+  exclude-dirs:
+    - frontend
+    - node_modules
+  exclude-dirs-use-default: true
