@@ -23,7 +23,16 @@ const previewJSON = ref('')
 const saving = ref(false)
 const toast = ref<{ msg: string; type: 'success' | 'error' } | null>(null)
 
-onMounted(async () => {
+async function loadProfile() {
+  name.value = ''
+  description.value = ''
+  scope.value = 'agent'
+  modelOverride.value = ''
+  permissions.value = []
+  hooks.value = []
+  envVars.value = []
+  activeTab.value = 'permissions'
+
   if (profileId.value) {
     const full = await store.getProfileFull(profileId.value)
     if (full) {
@@ -34,10 +43,13 @@ onMounted(async () => {
       permissions.value = full.permissions.map(p => ({ type: p.type, tool: p.tool }))
       hooks.value = full.hooks.map(h => ({ event: h.event, matcher: h.matcher, command: h.command, blocking: h.blocking, timeoutSeconds: h.timeoutSeconds }))
       envVars.value = full.envVars.map(e => ({ key: e.key, value: e.value }))
-      updatePreview()
     }
   }
-})
+  updatePreview()
+}
+
+onMounted(loadProfile)
+watch(profileId, loadProfile)
 
 async function updatePreview() {
   if (profileId.value) {
