@@ -54,7 +54,7 @@ const scopeLabel: Record<string, string> = {
     <!-- Toolbar -->
     <div class="flex items-center justify-between px-6 py-4 border-b border-border bg-background shrink-0">
       <div class="flex items-center gap-3">
-        <h2 class="text-base font-semibold text-foreground">Harness Profiles</h2>
+        <h2 class="text-base font-semibold text-foreground">{{ t('profile.list.title') }}</h2>
         <span v-if="store.profiles.length > 0" class="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
           {{ store.profiles.length }}
         </span>
@@ -67,7 +67,7 @@ const scopeLabel: Record<string, string> = {
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          Import settings.json
+          {{ t('profile.list.import') }}
         </button>
         <button
           class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
@@ -76,7 +76,7 @@ const scopeLabel: Record<string, string> = {
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
-          New Profile
+          {{ t('nav.newProfile') }}
         </button>
       </div>
     </div>
@@ -102,13 +102,13 @@ const scopeLabel: Record<string, string> = {
             class="px-4 py-2 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
             @click="router.push('/profiles/new')"
           >
-            Create Profile
+            {{ t('profile.list.create') }}
           </button>
           <button
             class="px-4 py-2 text-sm rounded-md border border-border text-foreground hover:bg-muted transition-colors"
             @click="router.push('/presets')"
           >
-            Browse Presets
+            {{ t('profile.list.browse') }}
           </button>
         </div>
       </div>
@@ -134,7 +134,7 @@ const scopeLabel: Record<string, string> = {
             <p v-if="profile.description" class="text-xs text-muted-foreground mt-0.5 line-clamp-1">{{ profile.description }}</p>
           </div>
 
-          <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+          <div class="flex items-center gap-1 opacity-30 group-hover:opacity-100 transition-opacity shrink-0">
             <button
               class="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               title="Edit"
