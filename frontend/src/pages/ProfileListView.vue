@@ -42,10 +42,8 @@ async function handleImport() {
   else if (store.error) showToast(t('import.error', { error: store.error }), 'error')
 }
 
-const scopeLabel: Record<string, string> = {
-  agent: 'agent',
-  task: 'task',
-  project: 'project',
+function scopeLabel(scope: string): string {
+  return t(`scope.${scope}`)
 }
 </script>
 
@@ -85,7 +83,7 @@ const scopeLabel: Record<string, string> = {
     <div class="flex-1 overflow-y-auto p-6">
       <!-- Loading -->
       <div v-if="store.loading" class="flex items-center justify-center h-40 text-muted-foreground text-sm">
-        Loading...
+        {{ t('profile.list.loading') }}
       </div>
 
       <!-- Empty -->
@@ -129,12 +127,12 @@ const scopeLabel: Record<string, string> = {
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2">
               <span class="font-medium text-sm text-foreground truncate">{{ profile.name }}</span>
-              <span class="text-xs text-muted-foreground px-1.5 py-0.5 bg-muted rounded">{{ scopeLabel[profile.scope] ?? profile.scope }}</span>
+              <span class="text-xs text-muted-foreground px-1.5 py-0.5 bg-muted rounded">{{ scopeLabel(profile.scope) }}</span>
             </div>
             <p v-if="profile.description" class="text-xs text-muted-foreground mt-0.5 line-clamp-1">{{ profile.description }}</p>
           </div>
 
-          <div class="flex items-center gap-1 opacity-30 group-hover:opacity-100 transition-opacity shrink-0">
+          <div class="flex items-center gap-1 shrink-0">
             <button
               class="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               title="Edit"

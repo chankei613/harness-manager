@@ -2,10 +2,12 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProfilesStore, type Permission, type Hook, type EnvVar } from '@/stores/profiles'
+import { useI18n } from '@/i18n'
 
 const route = useRoute()
 const router = useRouter()
 const store = useProfilesStore()
+const { t } = useI18n()
 
 const isEdit = computed(() => route.params.id !== undefined)
 const profileId = computed(() => isEdit.value ? Number(route.params.id) : null)
@@ -97,7 +99,7 @@ async function save() {
     }
     if (profileId.value) {
       await store.updateProfile(profileId.value, req)
-      showToast('Saved')
+      showToast(t('edit.saved'))
       updatePreview()
     } else {
       const result = await store.createProfile(req)
@@ -111,7 +113,7 @@ async function save() {
 async function handleExport() {
   if (!profileId.value) { await save(); return }
   const path = await store.exportProfile(profileId.value)
-  if (path) showToast(`Exported to ${path}`)
+  if (path) showToast(t('edit.exported', { path }))
 }
 
 function showToast(msg: string, type: 'success' | 'error' = 'success') {
@@ -170,7 +172,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             </svg>
           </button>
           <h2 class="text-base font-semibold text-foreground">
-            {{ isEdit ? 'Edit Profile' : 'New Profile' }}
+            {{ isEdit ? t('edit.title.edit') : t('edit.title.new') }}
           </h2>
         </div>
         <div class="flex items-center gap-2">
@@ -182,14 +184,14 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
             </svg>
-            Export
+            {{ t('edit.btn.export') }}
           </button>
           <button
             :disabled="!name.trim() || saving"
             class="px-4 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             @click="save"
           >
-            {{ saving ? 'Saving...' : 'Save' }}
+            {{ saving ? t('edit.btn.saving') : t('edit.btn.save') }}
           </button>
         </div>
       </div>
@@ -199,7 +201,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
         <!-- Basic info -->
         <div class="grid grid-cols-2 gap-4">
           <div class="col-span-2 space-y-1">
-            <label class="text-xs font-medium text-muted-foreground">Name *</label>
+            <label class="text-xs font-medium text-muted-foreground">{{ t('edit.label.name') }} *</label>
             <input
               v-model="name"
               placeholder="e.g. backend-dev"
@@ -207,7 +209,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             />
           </div>
           <div class="col-span-2 space-y-1">
-            <label class="text-xs font-medium text-muted-foreground">Description</label>
+            <label class="text-xs font-medium text-muted-foreground">{{ t('edit.label.description') }}</label>
             <input
               v-model="description"
               placeholder="What is this profile for?"
@@ -215,18 +217,18 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             />
           </div>
           <div class="space-y-1">
-            <label class="text-xs font-medium text-muted-foreground">Scope</label>
+            <label class="text-xs font-medium text-muted-foreground">{{ t('edit.label.scope') }}</label>
             <select
               v-model="scope"
               class="w-full px-3 py-2 text-sm border border-border rounded-md bg-background focus:outline-none focus:ring-1 focus:ring-foreground/20"
             >
-              <option value="agent">Agent</option>
-              <option value="task">Task</option>
-              <option value="project">Project</option>
+              <option value="agent">{{ t('scope.agent') }}</option>
+              <option value="task">{{ t('scope.task') }}</option>
+              <option value="project">{{ t('scope.project') }}</option>
             </select>
           </div>
           <div class="space-y-1">
-            <label class="text-xs font-medium text-muted-foreground">Model Override <span class="opacity-50">(optional)</span></label>
+            <label class="text-xs font-medium text-muted-foreground">{{ t('edit.label.model') }} <span class="opacity-50">{{ t('edit.label.modelOptional') }}</span></label>
             <input
               v-model="modelOverride"
               placeholder="claude-sonnet-4-6"
@@ -241,13 +243,13 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
             <button
               v-for="tab in ['permissions', 'hooks', 'env'] as const"
               :key="tab"
-              class="px-3 py-2 text-sm capitalize transition-colors border-b-2 -mb-px"
+              class="px-3 py-2 text-sm transition-colors border-b-2 -mb-px"
               :class="activeTab === tab
                 ? 'border-foreground text-foreground font-medium'
                 : 'border-transparent text-muted-foreground hover:text-foreground'"
               @click="activeTab = tab"
             >
-              {{ tab }}
+              {{ t(`edit.tab.${tab}`) }}
               <span v-if="tab === 'permissions' && permissions.length > 0" class="ml-1 text-xs opacity-60">({{ permissions.length }})</span>
               <span v-if="tab === 'hooks' && hooks.length > 0" class="ml-1 text-xs opacity-60">({{ hooks.length }})</span>
               <span v-if="tab === 'env' && envVars.length > 0" class="ml-1 text-xs opacity-60">({{ envVars.length }})</span>
@@ -274,7 +276,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                 class="px-3 py-1.5 text-sm rounded-md bg-gray-900 text-white hover:brightness-110 transition-colors"
                 @click="addPermission"
               >
-                Add
+                {{ t('edit.btn.add') }}
               </button>
             </div>
             <div class="space-y-1.5">
@@ -299,7 +301,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                   </svg>
                 </button>
               </div>
-              <p v-if="permissions.length === 0" class="text-xs text-muted-foreground py-2">No permissions defined. All tools use Claude Code defaults.</p>
+              <p v-if="permissions.length === 0" class="text-xs text-muted-foreground py-2">{{ t('edit.empty.permissions') }}</p>
             </div>
           </div>
 
@@ -312,7 +314,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
               </svg>
-              Add Hook
+              {{ t('edit.btn.addHook') }}
             </button>
             <div class="space-y-3">
               <div
@@ -333,7 +335,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                   />
                   <label class="flex items-center gap-1 text-xs text-muted-foreground ml-auto">
                     <input v-model="hook.blocking" type="checkbox" class="rounded" />
-                    blocking
+                    {{ t('edit.hook.blocking') }}
                   </label>
                   <button
                     class="text-muted-foreground hover:text-red-500 transition-colors"
@@ -349,7 +351,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                   class="w-full px-3 py-1.5 text-xs font-mono border border-border rounded bg-background focus:outline-none focus:ring-1 focus:ring-foreground/20"
                 />
               </div>
-              <p v-if="hooks.length === 0" class="text-xs text-muted-foreground py-2">No hooks defined.</p>
+              <p v-if="hooks.length === 0" class="text-xs text-muted-foreground py-2">{{ t('edit.empty.hooks') }}</p>
             </div>
           </div>
 
@@ -362,7 +364,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
               </svg>
-              Add Variable
+              {{ t('edit.btn.addVar') }}
             </button>
             <div class="space-y-2">
               <div v-for="(env, i) in envVars" :key="i" class="flex items-center gap-2">
@@ -384,7 +386,7 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
                   </svg>
                 </button>
               </div>
-              <p v-if="envVars.length === 0" class="text-xs text-muted-foreground py-2">No environment variables defined.</p>
+              <p v-if="envVars.length === 0" class="text-xs text-muted-foreground py-2">{{ t('edit.empty.env') }}</p>
             </div>
           </div>
         </div>
@@ -394,8 +396,8 @@ const hookEvents = ['PreToolUse', 'PostToolUse', 'Stop', 'Notification'] as cons
     <!-- Preview panel -->
     <div class="w-80 shrink-0 border-l border-border flex flex-col bg-gray-50/50">
       <div class="px-4 py-3 border-b border-border shrink-0">
-        <h3 class="text-xs font-medium text-muted-foreground uppercase tracking-wider">JSON Preview</h3>
-        <p class="text-xs text-muted-foreground mt-0.5">settings.json output</p>
+        <h3 class="text-xs font-medium text-muted-foreground uppercase tracking-wider">{{ t('edit.preview.title') }}</h3>
+        <p class="text-xs text-muted-foreground mt-0.5">{{ t('edit.preview.subtitle') }}</p>
       </div>
       <pre class="flex-1 overflow-auto p-4 text-xs font-mono text-foreground whitespace-pre leading-relaxed">{{ previewJSON || '{}' }}</pre>
     </div>

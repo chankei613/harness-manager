@@ -47,6 +47,44 @@ jobs:
       - name: Build
         run: wails build -platform ${{ matrix.platform }} -o ${{ matrix.artifact }}
 
+      - name: Import certificate (macOS)
+        if: runner.os == 'macOS'
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        run: |
+          echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+          security create-keychain -p actions-keychain build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p actions-keychain build.keychain
+          security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k actions-keychain build.keychain
+
+      - name: Sign app (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          IDENTITY=$(security find-identity -v -p codesigning build.keychain \
+            | grep "Developer ID Application" | awk '{print $2}')
+          codesign --deep --force --options=runtime \
+            --entitlements build/darwin/entitlements.plist \
+            --sign "$IDENTITY" \
+            --timestamp \
+            build/bin/harness-manager.app
+
+      - name: Notarize app (macOS)
+        if: runner.os == 'macOS'
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          xcrun notarytool submit build/bin/harness-manager.app \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_APP_PWD" \
+            --team-id "$APPLE_TEAM_ID" \
+            --wait
+          xcrun stapler staple build/bin/harness-manager.app
+
       - name: Zip artifact (macOS)
         if: runner.os == 'macOS'
         run: |
