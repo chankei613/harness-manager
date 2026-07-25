@@ -78,12 +78,14 @@ jobs:
           APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
-          xcrun notarytool submit build/bin/harness-manager.app \
+          ditto -c -k --keepParent build/bin/harness-manager.app notarize-submission.zip
+          xcrun notarytool submit notarize-submission.zip \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_PWD" \
             --team-id "$APPLE_TEAM_ID" \
             --wait
           xcrun stapler staple build/bin/harness-manager.app
+          rm -f notarize-submission.zip
 
       - name: Zip artifact (macOS)
         if: runner.os == 'macOS'
